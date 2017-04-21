@@ -37,7 +37,9 @@ function runFrameworkTest(options) {
         stdio: 'inherit'
       });
 
-      driver = webdriver.buildWebDriverForChrome();
+      driver = process.env.BROWSER === 'firefox'
+        ? webdriver.buildWebDriverForFirefox()
+        : webdriver.buildWebDriverForChrome();
 
       return waitForServer(host, port, timeout);
     });
